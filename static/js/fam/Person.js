@@ -5,6 +5,7 @@ define([], function () {
       tagline: '',
       img: '',
       url: ''
-    }
+    },
+    urlRoot: '/ws/fam'
   });
 });

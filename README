@@ -3,7 +3,9 @@ A place for our mormon.org family to rock.
 Roadmap
 -------
 
+- Bookmarkable detail view
 - Join by entering mormonorg profile url
+- Nodejs intellij debugging
 - Auth
 - Fields that aren't currently supported on mormon.org
   - Real vanity url
