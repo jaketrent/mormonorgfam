@@ -1,0 +1,8 @@
+{
+  "name": "mormonorgfam",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.2.0",
+    "jade": "0.17.0"
+  }
+}
