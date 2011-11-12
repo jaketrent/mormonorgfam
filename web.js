@@ -21,11 +21,34 @@ app.configure('production', function () {
 
 app.set('views', __dirname + '/views');
 
+var fam = require('./fam');
+
 app.get('/', function(req, res) {
-  res.render('root.jade');
+  res.render('index.jade', { layout: 'require' });
 });
 
-var fam = require('./fam');
+// ws endpoints
+
+app.get('/ws/fam', function (req, res) {
+  res.send(fam.all)
+});
+
+app.get('/ws/fam/:id', function (req, res) {
+  var person = fam.find(req.params.id);
+  res.send(person)
+});
+
+app.post('/ws/fam', function (req, res) {
+  var id = fam.insert(req.body.person);
+});
+
+app.put('/ws/fam/:id', function (req, res) {
+  var id = req.params.id;
+  fam.set(id, req.body.person);
+  return fam.find(id);
+});
+
+// views
 
 app.get('/fam', function (req, res) {
   res.render('fam/index.jade', {
