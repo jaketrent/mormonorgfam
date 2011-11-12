@@ -5,7 +5,7 @@ define(['fam/LineupView'], function (LineupView) {
     },
     lineup: function () {
       var lineupView = new LineupView();
-      indexView.render().el;
+      lineupView.render().el;
     }
   });
 });
