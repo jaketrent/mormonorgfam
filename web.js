@@ -2,15 +2,18 @@ var express = require('express');
 
 var app = express.createServer(express.logger());
 
-app.configure('development', function () {
+app.configure(function () {
   app.use(express.logger());
+  app.use(express.static(__dirname + '/static'));
+});
+
+app.configure('development', function () {
   app.use(express.errorHandler({
     dumpExceptions: true,
     showStack:true
   }));
 });
 app.configure('production', function () {
-  app.use(express.logger());
   app.use(express.errorHandler());
 });
 
