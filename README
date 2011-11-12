@@ -1,1 +1,14 @@
 A place for our mormon.org family to rock.
+
+Roadmap
+-------
+
+- Join by entering mormonorg profile url
+- Auth
+- Fields that aren't currently supported on mormon.org
+  - Real vanity url
+  - Favorites
+    - Quote by general authority
+    - Church website
+    - Fhe treat
+
