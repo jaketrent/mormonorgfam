@@ -1,0 +1,4 @@
+h1 Editing #{person.name}
+form(action='/fam/' + person.id, method='POST')
+  input(type='hidden', name='_method', value='PUT')
+  div!= partial('person_form', { locals: { person: person }})

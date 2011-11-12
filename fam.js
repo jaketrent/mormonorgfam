@@ -28,4 +28,26 @@ module.exports.find = function (id) {
     }
   };
   return found;
-}
+};
+
+module.exports.set = function (id, person) {
+  id = parseInt(id, 10);
+  person.id = id;
+  people[id - 1] = person;
+};
+
+module.exports.new = function () {
+  return {
+    name: '',
+    url: '',
+    img: '',
+    tagline: ''
+  }
+};
+
+module.exports.insert = function (person) {
+  var id = people.length;
+  person.id = id;
+  people[id] = person;
+  return id;
+};

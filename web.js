@@ -3,10 +3,10 @@ var express = require('express');
 var app = express.createServer(express.logger());
 
 app.configure(function () {
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
   app.use(express.logger());
   app.use(express.static(__dirname + '/static'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
 });
 
 app.configure('development', function () {
@@ -35,6 +35,19 @@ app.get('/fam', function (req, res) {
   });
 });
 
+app.get('/fam/new', function (req, res) {
+  res.render('fam/new.jade', {
+    locals: {
+      person: req.body && req.body.person || fam.new
+    }
+  });
+});
+
+app.post('/fam', function (req, res) {
+  var id = fam.insert(req.body.person);
+  res.redirect('/fam/' + id);
+});
+
 app.get('/fam/:id', function (req, res) {
   var person = fam.find(req.params.id);
   res.render('fam/show.jade', {
@@ -42,6 +55,21 @@ app.get('/fam/:id', function (req, res) {
       person: person
     }
   });
+});
+
+app.get('/fam/:id/edit', function (req, res) {
+  var person = fam.find(req.params.id);
+  res.render('fam/edit.jade', {
+    locals: {
+      person: person
+    }
+  });
+});
+
+app.put('/fam/:id', function (req, res) {
+  var id = req.params.id;
+  fam.set(id, req.body.person);
+  res.redirect('/fam/' + id);
 });
 
 var port = process.env.PORT || 3000;
