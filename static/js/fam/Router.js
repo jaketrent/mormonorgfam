@@ -1,10 +1,10 @@
-define(['fam/IndexView'], function (IndexView) {
+define(['fam/LineupView'], function (LineupView) {
   return Backbone.Router.extend({
     routes: {
-      '': 'index'
+      '': 'lineup'
     },
-    index: function () {
-      var indexView = new IndexView();
+    lineup: function () {
+      var lineupView = new LineupView();
       indexView.render().el;
     }
   });
