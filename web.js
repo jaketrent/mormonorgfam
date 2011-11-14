@@ -39,7 +39,32 @@ app.get('/ws/fam/:id', function (req, res) {
 });
 
 app.post('/ws/fam', function (req, res) {
-  var id = fam.insert(req.body.person);
+
+  var request = require('request');
+  var jsdom = require('jsdom');
+  var url = req.body.url;
+  
+  request({ uri: url }, function (error, scrapeReq, body) {
+    if (error && scrapeReq.statusCode !== 200) {
+      console.log('Error getting mormon.org profile: ' + url);
+    }
+    jsdom.env({
+      html: body,
+      scripts: [
+        'http://code.jquery.com/jquery-1.5.min.js'
+      ]
+    }, function (err, window) {
+      var $ = window.jQuery;
+      var newPerson = {
+        name: $('#profile-head h1').text(),
+        img: 'http://mormon.org' + $('#profile-picture img').attr('src'),
+        url: url,
+        tagline: $('#profile-head dl div p').text()
+      };
+      var id = fam.insert(newPerson);
+      res.send(newPerson);
+    });
+  });
 });
 
 app.put('/ws/fam/:id', function (req, res) {

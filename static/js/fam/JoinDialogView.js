@@ -6,7 +6,7 @@ define(['tmpl!fam/JoinDialog', 'fam/Person'], function (JoinDialogTmpl, Person) 
       'click .go': 'importProfile'
     },
     initialize: function () {
-      _.bindAll(this, 'render', 'closeView', 'importProfile');
+      _.bindAll(this, 'render', 'closeView', 'importProfile', 'importProfileSuccess');
       this.model = new Person();
     },
     closeView: function () {
@@ -14,16 +14,20 @@ define(['tmpl!fam/JoinDialog', 'fam/Person'], function (JoinDialogTmpl, Person) 
     },
     importProfile: function () {
       this.model.save(this.model.attributes, {
-        success: function (model, res) {
-          alert('success!');
-        },
+        success: this.importProfileSuccess,
         error: function (model, res) {
           alert('failure!');
         }
-      });
+      }, this);
+    },
+    importProfileSuccess: function (model, res) {
+      this.model = model;
+      this.collection.add(this.model);
+      alert('success!');
     },
     render: function () {
       $(this.el).html(JoinDialogTmpl());
+      Backbone.ModelBinding.bind(this);
       return this;
     }
   });

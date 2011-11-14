@@ -9,6 +9,7 @@ define(['fam/PersonLineupView', 'fam/Family', 'tmpl!fam/JoinBtn', 'fam/JoinDialo
 
       this.collection = new Family();
       this.collection.bind('reset', this.render);
+      this.collection.bind('add', this.render);
       this.collection.fetch();
     },
     appendPerson: function (person) {
@@ -18,10 +19,13 @@ define(['fam/PersonLineupView', 'fam/Family', 'tmpl!fam/JoinBtn', 'fam/JoinDialo
       $(this.el).append(personLineupView.render().el);
     },
     showJoin: function () {
-      var joinDialogView = new JoinDialogView();
+      var joinDialogView = new JoinDialogView({
+        collection: this.collection
+      });
       $('body').append(joinDialogView.render().el);
     },
     render: function () {
+      $(this.el).html('');
       _(this.collection.models).each(this.appendPerson);
       $(this.el).append(JoinBtnTmpl());
       return this;

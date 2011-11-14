@@ -7,6 +7,7 @@ require({
     "jquery": "/js/vendor/jquery",
     "underscore": "/js/vendor/underscore",
     "backbone": "/js/vendor/backbone",
+    "backbone.modelbinding": "/js/vendor/backbone.modelbinding",
     "handlebars": "/js/vendor/handlebars.1.0.0.beta.3"
   }
 }, ['require', 'webstack'], function (require) {
