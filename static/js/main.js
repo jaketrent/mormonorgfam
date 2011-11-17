@@ -8,7 +8,8 @@ require({
     "underscore": "/js/vendor/underscore",
     "backbone": "/js/vendor/backbone",
     "backbone.modelbinding": "/js/vendor/backbone.modelbinding",
-    "handlebars": "/js/vendor/handlebars.1.0.0.beta.3"
+    "handlebars": "/js/vendor/handlebars.1.0.0.beta.3",
+    "polymaps": "/js/vendor/polymaps.min"
   }
 }, ['require', 'webstack'], function (require) {
   require(['fam/Router'], function (Router) {
